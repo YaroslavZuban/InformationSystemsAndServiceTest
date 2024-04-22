@@ -1,6 +1,7 @@
 package com.example.information_systems_and_service_test.controller;
 
 import com.example.information_systems_and_service_test.controller.data_creation.ModelIntermediate;
+import com.example.information_systems_and_service_test.controller.data_creation.ObjectIntermediate;
 import com.example.information_systems_and_service_test.controller.data_creation.TechnicIntermediate;
 import com.example.information_systems_and_service_test.entity.Model;
 import com.example.information_systems_and_service_test.entity.Technic;
@@ -36,5 +37,10 @@ public class ModelRestController {
     @PostMapping(value = "/create-model", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createTechnic(@Valid @RequestBody(required = false) ModelIntermediate modelIntermediate) {
         this.modelService.createModel(modelIntermediate);
+    }
+
+    @PostMapping(value = "/create-model-object", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void createTechnic(@Valid @RequestBody(required = false) ObjectIntermediate objectIntermediate) {
+        this.modelService.createObject(objectIntermediate);
     }
 }
