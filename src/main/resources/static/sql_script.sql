@@ -4,6 +4,8 @@ create table equipment_type
     technic_type varchar NOT NULL
 );
 
+CREATE SEQUENCE equipment_type_seq;
+
 create table technic
 (
     id                    serial PRIMARY KEY,
@@ -14,6 +16,8 @@ create table technic
     online_option         boolean                                NOT NULL,
     installment_option    boolean                                NOT NULL
 );
+
+CREATE SEQUENCE technic_seq;
 
 create table model
 (
@@ -26,47 +30,58 @@ create table model
     product_availability boolean                         NOT NULL
 );
 
+CREATE SEQUENCE model_seq;
+
 create table televisions
 (
     id         serial PRIMARY KEY,
-    model_id   integer REFERENCES model (id) NOT NULL,
+    model_t_id integer REFERENCES model (id) NOT NULL,
     category   varchar                       NOT NULL,
     technology varchar                       NOT NULL
 );
 
+CREATE SEQUENCE televisions_seq;
+
 create table vacuum_cleaners
 (
     id                      serial PRIMARY KEY,
-    model_id                integer REFERENCES model (id) NOT NULL,
+    model_v_id              integer REFERENCES model (id) NOT NULL,
     dust_collector_capacity integer                       NOT NULL,
     mode_count              integer                       NOT NULL
 );
 
+CREATE SEQUENCE vacuum_cleaners_seq;
 
 create table refrigerators
 (
     id              serial PRIMARY KEY,
-    model_id        integer REFERENCES model (id) NOT NULL,
+    model_r_id      integer REFERENCES model (id) NOT NULL,
     doors_count     integer                       NOT NULL,
     compressor_type varchar                       NOT NULL
 );
 
+CREATE SEQUENCE refrigerators_seq;
 
 create table smartphones
 (
     id           serial PRIMARY KEY,
-    model_id     integer REFERENCES model (id) NOT NULL,
+    model_s_id   integer REFERENCES model (id) NOT NULL,
     memory       varchar                       NOT NULL,
     camera_count integer                       NOT NULL
 );
 
+CREATE SEQUENCE smartphones_seq;
+
 create table computers
 (
     id             serial PRIMARY KEY,
-    model_id       integer REFERENCES model (id) NOT NULL,
+    model_c_id     integer REFERENCES model (id) NOT NULL,
     category       varchar                       NOT NULL,
     processor_type varchar                       NOT NULL
 );
+
+CREATE SEQUENCE computers_seq;
+
 
 INSERT INTO equipment_type (technic_type)
 VALUES ('Телевизоры'),
@@ -90,27 +105,28 @@ VALUES (1, 'SN123456', 'Чёрный', 55, 1299.99, true),
        (4, 'SN901234', 'Серебристый', 6.1, 999.99, true),
        (5, 'SN567890', 'Серый', 13.4, 1499.99, true);
 
-INSERT INTO televisions (model_id, category, technology)
+INSERT INTO televisions (model_t_id, category, technology)
 VALUES (1, 'QLED', '4K'),
        (1, 'QLED', '4K'),
        (1, 'QLED', '4K');
 
-INSERT INTO vacuum_cleaners (model_id, dust_collector_capacity, mode_count)
+INSERT INTO vacuum_cleaners (model_v_id, dust_collector_capacity, mode_count)
 VALUES (2, 2, 3),
        (2, 2, 3),
        (2, 2, 3);
 
-INSERT INTO refrigerators (model_id, doors_count, compressor_type)
+INSERT INTO refrigerators (model_r_id, doors_count, compressor_type)
 VALUES (3, 2, 'Инверторный'),
        (3, 2, 'Инверторный'),
        (3, 2, 'Инверторный');
 
-INSERT INTO smartphones (model_id, memory, camera_count)
+INSERT INTO smartphones (model_s_id, memory, camera_count)
 VALUES (4, '256GB', 3),
        (4, '512GB', 3),
        (4, '1TB', 3);
 
-INSERT INTO computers (model_id, category, processor_type)
+INSERT INTO computers (model_c_id, category, processor_type)
 VALUES (5, 'Ноутбук', 'Intel Core i7'),
        (5, 'Ноутбук', 'Intel Core i9'),
        (5, 'Ноутбук', 'Intel Core i5');
+

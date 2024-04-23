@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface EquipmentTypeRepository extends JpaRepository<EquipmentType, Integer> {
     Optional<EquipmentType> findByTechnicType(String technicType);
 
-    @Query(value = "SELECT e " +
+    @Query(value = "SELECT e.id, e.technic_type " +
             "FROM equipment_type as e" +
             "         INNER JOIN (SELECT equipment_type_id" +
             "                     FROM technic" +

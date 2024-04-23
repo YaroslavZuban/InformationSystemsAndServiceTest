@@ -1,6 +1,7 @@
 package com.example.information_systems_and_service_test.service;
 
 import com.example.information_systems_and_service_test.entity.Computer;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 

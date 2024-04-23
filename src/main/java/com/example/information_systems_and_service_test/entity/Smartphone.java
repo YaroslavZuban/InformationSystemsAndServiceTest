@@ -8,24 +8,26 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 @Getter
 @Setter
 @Table(name = "smartphones")
 public class Smartphone {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "smartphones_seq")
+    @SequenceGenerator(name = "smartphones_seq", sequenceName = "smartphones_seq", allocationSize = 1)
     @Column(name = "id")
     private Integer id;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "model_id", referencedColumnName = "id")
-    private List<Model> models;
+    @JoinColumn(name = "model_s_id",referencedColumnName = "id")
+    private Model model;
 
     @Column(name = "memory")
     private String memory;
 
-    @Column(name = "cameraCount")
+    @Column(name = "camera_count")
     private Integer cameraCount;
 
     public Smartphone() {
@@ -34,13 +36,5 @@ public class Smartphone {
     public Smartphone(String memory, Integer cameraCount) {
         this.memory = memory;
         this.cameraCount = cameraCount;
-    }
-
-    public void addList(Model model){
-        if(models==null){
-            models = new ArrayList<>();
-        }
-
-        models.add(model);
     }
 }

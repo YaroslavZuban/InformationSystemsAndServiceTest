@@ -8,19 +8,21 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 @Getter
 @Setter
 @Table(name = "refrigerators")
 public class Refrigerator {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "refrigerators_seq")
+    @SequenceGenerator(name = "refrigerators_seq", sequenceName = "refrigerators_seq", allocationSize = 1)
     @Column(name = "id")
     private Integer id;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "model_id", referencedColumnName = "id")
-    private List<Model> models;
+    @JoinColumn(name = "model_r_id",referencedColumnName = "id")
+    private Model model;
 
     @Column(name = "doors_count")
     private Integer doorsCount;
@@ -34,13 +36,5 @@ public class Refrigerator {
     public Refrigerator(Integer doorsCount, String compressorType) {
         this.doorsCount = doorsCount;
         this.compressorType = compressorType;
-    }
-
-    public void addList(Model model){
-        if(models==null){
-            models = new ArrayList<>();
-        }
-
-        models.add(model);
     }
 }

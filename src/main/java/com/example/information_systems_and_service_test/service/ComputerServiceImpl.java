@@ -51,4 +51,9 @@ public class ComputerServiceImpl implements ComputerService {
                 () -> new ResourceNotFoundException("Данного компьютера по заданному id: " + id + " не существует")
         );
     }
+
+    @Override
+    public void save(Computer computer) {
+        computerRepository.save(computer);
+    }
 }

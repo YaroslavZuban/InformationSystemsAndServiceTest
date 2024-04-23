@@ -51,4 +51,9 @@ public class SmartphoneServiceImpl implements SmartphoneService {
                 () -> new ResourceNotFoundException("Данного смартфона по заданному id: " + id + " не существует")
         );
     }
+
+    @Override
+    public void save(Smartphone smartphone) {
+        smartphoneRepository.save(smartphone);
+    }
 }

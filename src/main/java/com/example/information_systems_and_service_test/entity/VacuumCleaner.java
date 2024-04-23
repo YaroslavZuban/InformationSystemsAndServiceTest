@@ -8,19 +8,20 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 @Getter
 @Setter
 @Table(name = "vacuum_cleaners")
 public class VacuumCleaner {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vacuum_cleaners_seq")
+    @SequenceGenerator(name = "vacuum_cleaners_seq", sequenceName = "vacuum_cleaners_seq", allocationSize = 1)
     private Integer id;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "model_id", referencedColumnName = "id")
-    private List<Model> models;
+    @JoinColumn(name = "model_v_id",referencedColumnName = "id")
+    private Model model;
 
     @Column(name = "dust_collector_capacity")
     private Integer dustCollectorCapacity;
@@ -34,13 +35,5 @@ public class VacuumCleaner {
     public VacuumCleaner(Integer dustCollectorCapacity, Integer modeCount) {
         this.dustCollectorCapacity = dustCollectorCapacity;
         this.modeCount = modeCount;
-    }
-
-    public void addList(Model model){
-        if(models==null){
-            models = new ArrayList<>();
-        }
-
-        models.add(model);
     }
 }

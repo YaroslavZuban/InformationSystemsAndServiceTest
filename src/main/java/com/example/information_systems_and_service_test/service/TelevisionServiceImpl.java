@@ -50,4 +50,11 @@ public class TelevisionServiceImpl implements TelevisionService {
                 () -> new ResourceNotFoundException("Данного телевизора по заданному id: " + id + " не существует")
         );
     }
+
+    @Override
+    public void save(Television television) {
+        televisionRepository.save(television);
+    }
+
+
 }

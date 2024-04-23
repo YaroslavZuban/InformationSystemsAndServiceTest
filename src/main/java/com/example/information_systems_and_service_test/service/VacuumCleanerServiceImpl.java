@@ -51,4 +51,9 @@ public class VacuumCleanerServiceImpl implements VacuumCleanerService {
                 () -> new ResourceNotFoundException("Данной пылесосу по заданному id: " + id + " не существует")
         );
     }
+
+    @Override
+    public void save(VacuumCleaner vacuumCleaner) {
+        vacuumCleanerRepository.save(vacuumCleaner);
+    }
 }

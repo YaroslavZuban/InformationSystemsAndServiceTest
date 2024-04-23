@@ -51,4 +51,9 @@ public class RefrigeratorServiceImpl implements RefrigeratorService {
                 () -> new ResourceNotFoundException("Данного холодильника по заданному id: " + id + " не существует")
         );
     }
+
+    @Override
+    public void save(Refrigerator refrigerator) {
+        refrigeratorRepository.save(refrigerator);
+    }
 }

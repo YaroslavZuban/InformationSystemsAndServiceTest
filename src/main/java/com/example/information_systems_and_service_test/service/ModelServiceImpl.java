@@ -101,23 +101,32 @@ public class ModelServiceImpl implements ModelService {
 
         EquipmentType equipmentType = equipmentTypeService.getEquipmentTypeSerialNumber(serialNumber);
 
+        System.out.println(serialNumber);
+        System.out.println(equipmentType);
+
         if (!equipmentType.getTechnicType().equals(objectIntermediate.equipmentType())) {
             throw new ResourceNotFoundException("Данного типа: " + objectIntermediate.equipmentType() + " не существует");
         }
+
+        System.out.println("ДАнный участок кода работает");
 
         Model model = modelRepository.findBySerialNumber(serialNumber)
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Данной модели по заданному serial number: " + serialNumber + " не существует")
                 );
 
+        System.out.println(model);
+
         // Да понимаю что данный код не хороший т.к значения захардкожены
         switch (equipmentType.getTechnicType()) {
             case "Телевизоры" -> {
                 Television television = new Television(
                         (String) objectIntermediate.parameter_one(),
-                        (String) objectIntermediate.parameter_two());
-                model.setTelevision(television);
-                television.addList(model);
+                        (String) objectIntermediate.parameter_two()
+                );
+
+                model.addTelevisionList(television);
+                television.setModel(model);
                 televisionService.save(television);
             }
             case "Пылесосы" -> {
@@ -125,16 +134,19 @@ public class ModelServiceImpl implements ModelService {
                         (Integer) objectIntermediate.parameter_one(),
                         (Integer) objectIntermediate.parameter_two()
                 );
-                model.setVacuumCleaner(cleaner);
-                cleaner.addList(model);
+
+                model.addVacuumCleanerList(cleaner);
+                cleaner.setModel(model);
                 vacuumCleanerService.save(cleaner);
             }
             case "Холодильники" -> {
                 Refrigerator refrigerator = new Refrigerator(
                         (Integer) objectIntermediate.parameter_one(),
-                        (String) objectIntermediate.parameter_two());
-                model.setRefrigerator(refrigerator);
-                refrigerator.addList(model);
+                        (String) objectIntermediate.parameter_two()
+                );
+
+                model.addRefrigeratorList(refrigerator);
+                refrigerator.setModel(model);
                 refrigeratorService.save(refrigerator);
             }
             case "Смартфоны" -> {
@@ -142,8 +154,9 @@ public class ModelServiceImpl implements ModelService {
                         (String) objectIntermediate.parameter_one(),
                         (Integer) objectIntermediate.parameter_two()
                 );
-                model.setSmartphone(smartphone);
-                smartphone.addList(model);
+
+                model.addSmartphoneList(smartphone);
+                smartphone.setModel(model);
                 smartphoneService.save(smartphone);
             }
             case "Компьютеры" -> {
@@ -151,8 +164,9 @@ public class ModelServiceImpl implements ModelService {
                         (String) objectIntermediate.parameter_one(),
                         (String) objectIntermediate.parameter_two()
                 );
-                model.setComputer(computer);
-                computer.addList(model);
+
+                model.addComputerList(computer);
+                computer.setModel(model);
                 computerService.save(computer);
             }
         }
