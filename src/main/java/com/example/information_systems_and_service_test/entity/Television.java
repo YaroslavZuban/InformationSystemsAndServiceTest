@@ -14,8 +14,8 @@ import java.util.List;
 @Table(name = "televisions")
 public class Television {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "televisions_seq")
-    @SequenceGenerator(name = "televisions_seq", sequenceName = "televisions_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "televisions_id_seq")
+    @SequenceGenerator(name = "televisions_id_seq", sequenceName = "televisions_id_seq", allocationSize = 1)
     private Integer id;
 
     @JsonIgnore

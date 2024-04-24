@@ -14,8 +14,8 @@ import java.util.List;
 @Table(name = "vacuum_cleaners")
 public class VacuumCleaner {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vacuum_cleaners_seq")
-    @SequenceGenerator(name = "vacuum_cleaners_seq", sequenceName = "vacuum_cleaners_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vacuum_cleaners_id_seq")
+    @SequenceGenerator(name = "vacuum_cleaners_id_seq", sequenceName = "vacuum_cleaners_id_seq", allocationSize = 1)
     private Integer id;
 
     @JsonIgnore

@@ -12,8 +12,8 @@ import java.util.List;
 @Table(name = "technic")
 public class Technic {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "technic_seq")
-    @SequenceGenerator(name = "technic_seq", sequenceName = "technic_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "technic_id_seq")
+    @SequenceGenerator(name = "technic_id_seq", sequenceName = "technic_id_seq", allocationSize = 1)
     @Column(name = "id")
     private Integer id;
 
